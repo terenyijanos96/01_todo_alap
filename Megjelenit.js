@@ -1,24 +1,24 @@
+import MegjSor from "./MegjSor.js"
+
 class TodoView {
+    #adatLista
     constructor(szuloElem, adatLista) {
         this.szuloElem = szuloElem
-        this.adatLista = adatLista
+        this.#adatLista = adatLista
 
-        let html_tartalom = this.tablazatLetrehozasa();
-        this.szuloElem.html(html_tartalom)
+        this.szuloElem.append(`<table>`)
+        this.tableElem = this.szuloElem.children("table") 
+        this.tablazatbaIr()
     }
 
-    tablazatLetrehozasa(){
+    tablazatbaIr(){
         let html_tartalom = ""
+        for (let index = 0; index < this.#adatLista.length; index++) {
+            new MegjSor(this.#adatLista[index], this.tableElem)
+            
 
-        html_tartalom+= '<table class="table">'
-        this.adatLista.forEach(adatElem => {
-            html_tartalom += `<tr><td>${adatElem}</td></tr>`
-        });
-
-        html_tartalom+= "</table>"
-
-        return html_tartalom
-
+        }
+        this.szuloElem.append(html_tartalom)
     }
 }
 
